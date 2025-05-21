@@ -7,29 +7,83 @@ use Illuminate\Http\Request;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use App\Models\Employee;
 
 class FrontendController extends Controller
 {
     // public function index()
     // {
+    //     $emplyees = User::first();
+    //     // $designations = Designation::all();
+    //     dd($emplyees->division);
     //     return view('frontend.home');
     // }
 
-    public function index(PersonnelDataService $personnelService)
+    // public function index(PersonnelDataService $personnelService)
+    // {
+    //     // $allResearchers = $personnelService->getAllResearchers();
+    //     $allResearchers = Employee::all();
+
+    //     dd($allResearchers);
+        
+    //     // Get current page from query string or default to 1
+    //     $currentPage = LengthAwarePaginator::resolveCurrentPage();
+    //     $perPage = 30; // Items per page
+        
+    //     // Slice the array to get the items for the current page
+    //     $currentPageItems = array_slice($allResearchers, ($currentPage - 1) * $perPage, $perPage);
+        
+    //     // Create paginator instance
+    //     $researchers = new LengthAwarePaginator(
+    //         $currentPageItems,
+    //         count($allResearchers),
+    //         $perPage,
+    //         $currentPage,
+    //         [
+    //             'path' => LengthAwarePaginator::resolveCurrentPath(),
+    //             'pageName' => 'page',
+    //         ]
+    //     );
+        
+    //     return view('frontend.home', compact('researchers'));
+    // }
+
+    public function index()
     {
-        $allResearchers = $personnelService->getAllResearchers();
-        
-        // Get current page from query string or default to 1
+        $perPage = 30;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 10; // Items per page
-        
-        // Slice the array to get the items for the current page
-        $currentPageItems = array_slice($allResearchers, ($currentPage - 1) * $perPage, $perPage);
-        
-        // Create paginator instance
+
+        $query = Employee::query()
+            ->join('designations', 'employees.DesigShort', '=', 'designations.DesigShort')
+            ->whereNotIn('employees.InstShort', ['Release', 'Missing'])
+            ->select('employees.*', 'designations.DesigWeight')
+            ->orderBy('designations.DesigWeight', 'asc')
+            ->orderByRaw("
+                CASE 
+                    WHEN designations.DesigWeight = 2 THEN employees.special_priority
+                    ELSE NULL
+                END ASC
+            ")
+            ->orderByRaw("
+                CASE 
+                    WHEN designations.DesigWeight != 2 THEN employees.JoiningDate
+                    ELSE NULL
+                END ASC
+            ")
+            ->orderByRaw("
+                CASE 
+                    WHEN designations.DesigWeight != 2 THEN CAST(employees.BatchMerit AS UNSIGNED)
+                    ELSE NULL
+                END ASC
+            ");
+
+        $results = $query->get();
+
+        $currentPageItems = $results->slice(($currentPage - 1) * $perPage, $perPage)->values();
+
         $researchers = new LengthAwarePaginator(
             $currentPageItems,
-            count($allResearchers),
+            $results->count(),
             $perPage,
             $currentPage,
             [
@@ -37,7 +91,8 @@ class FrontendController extends Controller
                 'pageName' => 'page',
             ]
         );
-        
+
+
         return view('frontend.home', compact('researchers'));
     }
 

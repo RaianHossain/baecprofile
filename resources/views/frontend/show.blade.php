@@ -33,10 +33,25 @@
         <div class="row mt-4">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Research And Publication</button>
+                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Selected Publications</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Academic Info</button>
+                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Conference/Seminar/Symposium</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Meeting/Workshop/Training</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="research-tab" data-bs-toggle="tab" data-bs-target="#research-tab-pane" type="button" role="tab" aria-controls="research-tab-pane" aria-selected="false">Research Project</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="supervission-tab" data-bs-toggle="tab" data-bs-target="#supervission-tab-pane" type="button" role="tab" aria-controls="supervission-tab-pane" aria-selected="false">Supervission</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education-tab-pane" type="button" role="tab" aria-controls="education-tab-pane" aria-selected="false">Education</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="fellowship-tab" data-bs-toggle="tab" data-bs-target="#fellowship-tab-pane" type="button" role="tab" aria-controls="fellowship-tab-pane" aria-selected="false">Fellowship/Award</button>
                 </li>
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>

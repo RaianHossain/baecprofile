@@ -57,14 +57,25 @@
 
         .research-text .designation,
         .research-text .email,
-        .research-text .division,
-        .research-text .institute {
+        .research-text .division {
             font-size: 0.73rem;
             color: #161616;
             margin-bottom: 0.01rem;
             text-align: right;
             width: 100%;
             word-break: break-word;
+        }
+        .research-text .institute {
+            font-size: 0.83rem;
+            color: #161616;
+            margin-bottom: 0.01rem;
+            text-align: right;
+            width: 100%;
+            word-break: break-word;
+        }
+
+        .research-text .email  {
+            color: #004080 !important;
         }
 
         .research-text .interest-label {
@@ -84,7 +95,7 @@
         .text-primary {
             color: #0058A9 !important;
             text-decoration: underline !important;  
-            font-weight: 500 !important;          
+            font-weight: 500 !important;   
         }
     </style>
 
@@ -184,12 +195,12 @@
           </div> --}}
 
           @foreach ($researchers as $researcher) 
-            @if($researcher['InstShort'] == 'Release')        
+            @if($researcher['InstShort'] == 'Release' || $researcher['InstShort'] == 'Missing')        
               @continue
             @else 
               {{-- <div class="col"> --}}
-                <a href="{{ route('frontend.show', ['slug' => $researcher['EmpID']]) }}" class="col" style="text-decoration: none">
-                  <div class="card research-card h-100 overflow-hidden">
+                <a href="{{ route('frontend.show', ['slug' => $researcher['EmpID']]) }}" class="col" style="text-decoration: none;">
+                  <div class="card research-card h-100 overflow-hidden" style="border: 1px solid black;">
                     <div class="row g-0">
                       <div class="col-4 research-img-wrapper">
                         @if($researcher['EmpID'] == '02227')
@@ -201,19 +212,21 @@
                       <div class="col-8">
                         <div class="research-text">
                             <div class="d-flex flex-column align-items-end">
-                                <h5 class="fw-bold text-primary mb-1">{{ $researcher['EmpTitle']." ".$researcher['EmpFname']." ".$researcher['EmpLname'] }}</h5>
+                                <h5 class="fw-bold text-primary mb-1" style="font-size: 1.1rem !important; font-weight: 600 !important;">{{ $researcher['EmpTitle']." ".$researcher['EmpFname']." ".$researcher['EmpLname'] }}</h5>
                                 
                                 <!-- Modified these paragraphs to handle wrapping properly -->
-                                <p class="designation text-end" style="text-align: right; width: 100%;">{{ $researcher['DesigLong'] }}</p>
-                                <p class="institute text-end" style="text-align: right; width: 100%; word-break: break-word;">{{ $researcher['InstLong'] }}</p>
-                                <p class="division text-end" style="text-align: right; width: 100%;">{{ $researcher['DivLong'] }}</p>
-                                
+                                <p class="designation text-end" style="text-align: right; width: 100%; font-weight: 500;">{{ $researcher->designation->DesigLong }}</p>
+                                <p class="institute text-end" style="text-align: right; width: 100%; word-break: break-word;">{{ $researcher->institute->InstLong }}</p>
+                                @if($researcher['DivShort'] != '---')
+                                <p class="division text-end" style="text-align: right; width: 100%;">{{ $researcher->division->DivLong }}</p>
+                                @endif
                                 <p class="email text-end" style="text-align: right; width: 100%;">
                                     <i class="fas fa-envelope"></i> 
                                     <span>{{ $researcher['EmpEmail'] }}</span>
                                 </p>
                             </div>
-                            <div class="interest-label">Research Interest</div>
+                            <div class="interest-label mt-2">Research Interest</div>
+                            <p class="interests mb-0">Isotope Applications, Radioactive Waste Management</p>
                             <p class="interests mb-0">Isotope Applications, Radioactive Waste Management</p>
                         </div>
                       </div>
@@ -302,7 +315,7 @@
                   @endif
               </ul>
           </nav>
-      </div>
+        </div>
 
     </div>
     
