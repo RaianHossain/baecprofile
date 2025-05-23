@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('InstShort', 15)->primary();
             $table->string('InstLong', 60)->nullable();
             $table->string('InstPlace', 20)->nullable();
+            $table->timestamps();
         });
     }
 

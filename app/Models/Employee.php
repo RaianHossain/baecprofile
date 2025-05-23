@@ -23,4 +23,9 @@ class Employee extends Model
     {
         return $this->belongsTo(Division::class, 'DivShort', 'DivShort');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

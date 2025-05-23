@@ -9,6 +9,11 @@ class Institute extends Model
 {
     use HasFactory;
 
-    protected $table = 'institutes';
-    protected $guarded = [];
+    public $incrementing = false; // Because primary key is string
+    protected $primaryKey = 'InstShort';
+    protected $keyType = 'string';
+
+    protected $fillable = [
+        'InstShort', 'InstLong', 'InstPlace'
+    ];
 }

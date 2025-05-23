@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('DivShort')->nullable();
             $table->string('InstShort')->nullable();
             $table->string('DesigShort')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();       
+            $table->unsignedBigInteger('user_id')->nullable(); 
+            $table->timestamps();      
         });
     }
 

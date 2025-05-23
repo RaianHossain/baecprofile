@@ -29,8 +29,28 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $user = Auth::user();
+
+        if ($user->hasRole('super_admin')) {
+            return redirect()->intended(RouteServiceProvider::HOME); // '/dashboard'
+        }
+
+        if ($user->hasRole('researcher')) {
+            // $employee = $user->employee;
+
+            // if ($employee && $employee->EmpID) {
+            //     return redirect()->route('frontend.show', ['slug' => $employee->EmpID]);
+            // }
+
+            // // Optional fallback if EmpID is missing
+            // abort(403, 'No employee profile associated with your account.');
+            return redirect()->route('frontend.home');
+        }
+
+        // Optional fallback for other roles
+        return redirect()->intended('/');
     }
+
 
     /**
      * Destroy an authenticated session.

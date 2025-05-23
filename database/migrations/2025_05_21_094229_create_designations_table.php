@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('DesigShort', 30)->primary();
             $table->string('DesigLong', 50)->nullable();
             $table->float('DesigWeight', 4, 2)->nullable();
+            $table->timestamps();
         });
     }
 
