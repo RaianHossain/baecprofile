@@ -6,6 +6,7 @@ use App\Http\Controllers\DivisionController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\InstituteController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', [FrontendController::class, 'index'])->name('frontend.home');
-Route::get('/profile/{slug}', [FrontendController::class, 'show'])->name('frontend.show');
+Route::get('/profile/{id}', [FrontendController::class, 'show'])->name('frontend.show');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'role:super_admin'])->group(function () {
     Route::get('/dashboard/institutes', [InstituteController::class, 'index'])->name('admin.institutes');    
     Route::get('/dashboard/divisions', [DivisionController::class, 'index'])->name('admin.divisions');    
     Route::get('/dashboard/designations', [DesignationController::class, 'index'])->name('admin.designations');    
+    Route::get('/dashboard/employees', [EmployeeController::class, 'index'])->name('admin.employees');    
 
     //institutes apis
     Route::get('api/institutes/', [InstituteController::class, 'apiIndex']);
@@ -67,6 +69,13 @@ Route::middleware(['auth', 'role:super_admin'])->group(function () {
     Route::get('api/designations/{id}', [DesignationController::class, 'apiShow']);
     Route::put('api/designations/{id}', [DesignationController::class, 'apiUpdate']); 
     Route::delete('api/designations/{id}', [DesignationController::class, 'apiDestroy']);
+
+    // employees api
+    Route::get('api/employees/', [EmployeeController::class, 'apiIndex']);
+    Route::post('api/employees/', [EmployeeController::class, 'apiStore']);
+    Route::get('api/employees/{id}', [EmployeeController::class, 'apiShow']);
+    Route::put('api/employees/{id}', [EmployeeController::class, 'apiUpdate']); 
+    Route::delete('api/employees/{id}', [EmployeeController::class, 'apiDestroy']);
 });
 
 //frontend routes

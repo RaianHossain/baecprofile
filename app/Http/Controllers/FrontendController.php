@@ -94,14 +94,13 @@ class FrontendController extends Controller
     // {
     //     return view('frontend.show');
     // }
-    public function show($slug, PersonnelDataService $personnelService)
+    public function show($id, PersonnelDataService $personnelService)
     {
-        $researcher = $personnelService->getResearcherById($slug);
+        $researcher = Employee::where('id', $id)->first();
         
         if (!$researcher) {
             abort(404);
         }
-        // dd($researcher);
         
         return view('frontend.show', compact('researcher'));
     }

@@ -145,69 +145,18 @@
     <!-- researchers -->
     <div class="album py-2">
         <!-- Showing text -->
-        {{-- <p class="text-center px-3 py-2 border text-muted" style="width: fit-content; font-size:0.8rem; font-weight: 500;">SHOWING 1 - 10 of 100 RESULTS</p> --}}
         <p class="text-center px-3 py-2 border text-muted" style="width: fit-content; font-size:0.8rem; font-weight: 500;">
           SHOWING {{ $researchers->firstItem() }} - {{ $researchers->lastItem() }} of {{ $researchers->total() }} RESULTS
         </p>
 
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
           <!-- Researcher Card -->
-          {{-- <a href="{{ route('frontend.show', ['slug' => 'mahbub_alam']) }}" class="col" style="text-decoration: none">
-            <div class="card research-card h-100 overflow-hidden">
-              <div class="row g-0">
-                <!-- Image: 30% -->
-                <div class="col-4 research-img-wrapper">                  
-                  <img src="{{ asset('assets/milonvai.png') }}" alt="Dr. Mahbub Alam" class="img-fluid">
-                </div>
-      
-                <!-- Text: 70% -->
-                <div class="col-8">
-                  <div class="research-text">
-                    <h5 class="fw-bold mb-1 text-primary">Dr. Mahbub Alam</h5>
-                    <p class="designation">Principal Scientific Officer</p>
-                    <p class="institute">Bangladesh Atomic Energy Commission</p>
-                    <div class="interest-label">Research Interest</div>
-                    <p class="interests mb-0">Nuclear Safety, Radiation Protection, Environmental Monitoring</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a> --}}
-      
-          <!-- Repeat cards as needed -->
-          {{-- <div class="col">
-            <div class="card research-card h-100 overflow-hidden">
-              <div class="row g-0">
-                <div class="col-4 research-img-wrapper">
-                  <img src="{{ asset('assets/image_placeholder.png') }}" alt="Dr. Jane Doe" class="img-fluid">
-                </div>
-                <div class="col-8">
-                  <div class="research-text">
-                    <h5 class="fw-bold text-primary mb-1">Dr. Jane Doe</h5>
-                    <p class="designation">Principal Research Scientist</p>
-                    <p class="institute">International Atomic Research Institute</p>
-                    <p class="email">
-                      <i class="fas fa-envelope"></i> 
-                      <span>email@example.com</span>
-                    </p>
-                    <p class="phone">
-                      <i class="fas fa-phone-alt"></i>
-                      <span>+8801XXXXXXXXX</span>
-                    </p>
-                    <div class="interest-label">Research Interest</div>
-                    <p class="interests mb-0">Isotope Applications, Radioactive Waste Management</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> --}}
-
           @foreach ($researchers as $researcher) 
             @if($researcher['InstShort'] == 'Release' || $researcher['InstShort'] == 'Missing')        
               @continue
             @else 
               {{-- <div class="col"> --}}
-                <a href="{{ route('frontend.show', ['slug' => $researcher['EmpID']]) }}" class="col" style="text-decoration: none;">
+                <a href="{{ route('frontend.show', ['id' => $researcher->id]) }}" class="col" style="text-decoration: none;">
                   <div class="card research-card h-100 overflow-hidden" style="border: 1px solid black;">
                     <div class="row g-0">
                       <div class="col-4 research-img-wrapper">
@@ -247,25 +196,8 @@
               {{-- </div> --}}
             @endif
           @endforeach      
-          <!-- Add more cards below... -->
         </div>
-
-        {{-- pagination --}}
-        {{-- <div class="mt-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                  </li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
-            </nav>
-        </div> --}}
+        
         <!-- Pagination -->
         <div class="mt-3">
           <nav aria-label="Page navigation example">

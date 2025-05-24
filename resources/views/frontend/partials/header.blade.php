@@ -31,11 +31,6 @@
                         <i class="fas fa-user me-1"></i> Login
                     </button>
                 </a>
-                <a href="{{ route('register') }}">
-                    <button class="btn btn-primary" style="background-color: #0058A9; border: none;">
-                        <i class="fas fa-user-plus me-1"></i> Register
-                    </button>
-                </a>
                 @endif
             
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

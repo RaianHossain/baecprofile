@@ -2,207 +2,35 @@
 @section('title', 'Profile')
 
 @section('content')
-<style>
-    .last {
-        margin: 0 0 4px 0 !important;
-        color: #fff !important;
-        background: #FF0000;
-    }
-
-    #researchAndPublication p {
-        margin: 0 0 4px 0 !important;
-    }
-
-    #profile {
-        border-top: 2px solid #035abc;
-        border-bottom: 2px solid #035abc;
-        border-left: 1px solid #f4f4f4;
-        border-right: 1px solid #f4f4f4;
-        border-radius: 4px;
-        padding: 5px;
-        margin-bottom: 15px;
-    }
-
-    h4.ofc-headline {
-        border-top: 2px solid #035abc;
-        border-bottom: 2px solid #035abc;
-        border-left: 1px solid #f4f4f4;
-        border-right: 1px solid #f4f4f4;
-        border-radius: 4px;
-        padding: 5px;
-        margin-bottom: 15px;
-    }
-
-    .fa.fa-asterisk.no-padding.no-margin.animated.infinite.flash.submenu {
-        color: red;
-    }
-
-    .master {
-        font-size: 18px;
-    }
-
-    .officer-page .card-title a {
-        color: #333;
-    }
-
-    .officer-page .card .card-body a:hover {
-        color: #444;
-        text-decoration: none;
-    }
-
-    .apa ul li {
-        text-align: left;
-        padding: 5px 0;
-        display: inherit !important;
-    }
-
-    .apa ul li a {
-        font-family: "Open Sans", kalpurush;
-        font-weight: normal;
-        font-size: 16px;
-        padding-left: 5px;
-    }
-
-    .apa ul li a:hover {
-        color: #343a40;
-    }
-
-    .apa ul li:hover {
-        color: #343a40;
-    }
-
-    .apa .card {
-        height: 250px;
-    }
-
-    .apa img {
-        float: left;
-    }
-
-    .officer-page .apa .card .card-body {
-        padding: 0px;
-    }
-
-    .apa .no-style {
-        list-style-type: none;
-        padding: 0;
-        text-align: left;
-    }
-
-    .officer-page .apa .card {
-        overflow: hidden;
-    }
-
-    .btn-outline-primary a:hover {
-        color: #fff;
-        text-decoration: none;
-    }
-
-    @media only screen and (max-width:400px) {
-        .apa .card {
-            height: 350px;
+    <style>
+        .designation,
+        .institute {
+            font-size: 0.90rem;
+            color: #161616;
+            margin-bottom: 0.25rem;
         }
-    }
-
-    .card-body embed {
-        min-height: 800px;
-    }
-
-    @media only screen and (max-width:400px) {
-        .isInObjectOrEmbed {
-            width: 70% !important;
-        }
-    }
-
-    .jucsu ul li {
-        text-align: left;
-        padding: 8px 0;
-        display: inherit !important;
-    }
-
-    .jucsu ul li a {
-        font-family: "Open Sans", kalpurush;
-        font-weight: normal;
-        font-size: 16px;
-        padding-left: 5px;
-    }
-
-    .jucsu ul li a:hover {
-        color: #343a40;
-    }
-
-    .jucsu ul li:hover {
-        color: #343a40;
-    }
-
-    .jucsu img {
-        float: left;
-    }
-
-    .officer-page .jucsu .card .card-body {
-        padding: 0px;
-    }
-
-    .jucsu .no-style {
-        list-style-type: none;
-        padding: 0;
-        text-align: left;
-    }
-</style>
-
-<div class="container mt-4">
-    <div class="content-section people-page teacher-details-page">  
-
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <img class="card-img-top img-fluid mx-auto d-block lazy" src="{{ asset('assets/image_placeholder.png') }}"   alt="Dr. Jugal Krishna Das, B.Sc(Donetsk), MSc.(Donetsk), PhD(Kiev)">
-                    <div class="card-body">
-                        <h6>
-                            <a href="#">{{ $researcher['EmpTitle']." ".$researcher['EmpFname']." ".$researcher['EmpLname'] }}<br> </a>
-                            {{ $researcher->EmpShortDegree }}
-                            <small>
-                            @if($researcher->EmpSpecialAssignment != NULL || $researcher->EmpSpecialAssignment != ""){{ $researcher->EmpSpecialAssignment }} & @endif {{ $researcher->designation->DesigLong }}<br>{{ $researcher->institute->InstLong }} </small>
-                        </h6>
-                    </div>
-                </div>
+    </style>
+    <div class="container">
+        <div class="row mt-4 py-2 border">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">                
+                @if($researcher['EmpID'] == '02227')
+                    <img src="{{ asset('assets/milonvai.png') }}" alt="Dr. Mahbub Alam" class="img-fluid">
+                @else
+                    <img src="{{ asset('assets/image_placeholder.png') }}" alt="{{ $researcher['EmpFname'] }}" class="img-fluid">
+                @endif                    
             </div>
+            <div class="col-md-8 d-flex flex-column justify-content-center align-items-center align-items-sm-center align-items-md-start pt-2 pt-sm-2 pt-md-0"> 
+                <h1 class="text-primary">{{ $researcher['EmpTitle']." ".$researcher['EmpFname']." ".$researcher['EmpLname'] }}</h1>
+                <p class="text-muted designation">{{ $researcher['DesigLong'] }}</p>
+                <p class="text-muted institute">{{ $researcher['InstLong'] }}</p>
+                <p class="text-muted institute">{{ $researcher['DivLong'] }}</p>
+                <p class="text-muted py-0 my-1"><span style="font-weight: 500; text-decoration: underline">Research Interests:</span> Computer Vision, Machine Learning, Artificial Intelligence</p>
+                <p class="text-muted"><span  style="font-weight: 500; text-decoration: underline">Short Bio: </span>{{ $researcher['EmpTitle']." ".$researcher['EmpFname']." ".$researcher['EmpLname'] }} is a dedicated researcher with extensive experience in the fields of Computer Vision, Machine Learning, and Artificial Intelligence. As a Senior Scientific Officer at the Bangladesh Atomic Energy Commission, he has contributed significantly to various projects aimed at advancing nuclear safety and environmental monitoring. His work continues to impact both the scientific community and the general public.</p>       
 
-            <div class="col-md-9">
-                <div id="profile" class="d-flex justify-content-between align-items-center">
-                    <h3 class="mb-0">SHORT BIOGRAPHY</h3>
-                    @if(!Auth::check())                
-                    <a href="{{ route('register', ['researcher_id' => $researcher->id]) }}">
-                        <button class="btn btn-primary" style="background-color: #0058A9; border: none;">
-                            <i class="fas fa-user-plus me-1"></i> Register
-                        </button>
-                    </a>
-                    @endif
-                </div>
-
-                <p style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit consectetur, nam blanditiis placeat omnis assumenda. 
-                    Perferendis nihil itaque accusamus magnam doloremque soluta illo eius nesciunt id reprehenderit doloribus dignissimos 
-                    laudantium dolor, et ad rem ut blanditiis delectus atque! Quaerat voluptate impedit ea, assumenda fuga alias exercitationem 
-                    nemo quibusdam placeat molestias? Quisquam inventore sed dolore iste! Perferendis, voluptate. Id odit alias ullam, maiores 
-                    obcaecati, tempore dicta officiis non tempora culpa inventore possimus aut corrupti perspiciatis sed ipsum accusantium maxime 
-                    quis? Fuga saepe ducimus cum voluptatem quae alias facilis nobis dignissimos non doloremque, officia ab fugit cupiditate omnis 
-                    optio, sit libero aliquid voluptate voluptatibus nihil veritatis qui? Incidunt ipsam qui fugit nulla atque, tempore saepe 
-                    neque? Exercitationem excepturi necessitatibus expedita. Pariatur cum expedita nisi facere veritatis, eius maxime veniam 
-                    quo atque nostrum, corporis eligendi, magnam non ipsa debitis voluptatem obcaecati. Saepe, totam eaque. Maiores magnam 
-                    sapiente repellendus laborum vero accusantium dolorum qui ratione, quod architecto mollitia tempore pariatur rem? 
-                    Ab commodi id deleniti reprehenderit corrupti odio voluptatibus necessitatibus quis soluta ad! Cumque perspiciatis 
-                    iste voluptate non, distinctio praesentium. Et exercitationem quo, quae eveniet ad ipsam, quis nam magni rem 
-                    suscipit impedit officiis odio repudiandae vel aliquid nulla neque recusandae! Incidunt, voluptates totam.</p>
-                <p style="text-align: right; color: #1206ee;"><a href="#"><i>Read More....</i></a></p>
-
-                <h6 class="mt-3"><strong>RESEARCH INTEREST</strong></h6>
-                <p>Computer Networks, Machine Learning, Natural Language Processing, Software Engineering.</p>
             </div>
-
         </div>
 
         <div class="row mt-4">
-            <!-- tab lists -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                   <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Selected Publications</button>
@@ -228,10 +56,8 @@
                 <li class="nav-item" role="presentation">
                   <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
                 </li>
-            </ul>
-
-            <!-- tab infos -->
-            <div class="tab-content border rounded-bottom p-4" id="myTabContent">
+              </ul>
+              <div class="tab-content border rounded-bottom p-4" id="myTabContent">
                 <!-- Research & Publication Tab -->
                 <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                     @if(true)
@@ -327,10 +153,5 @@
             </div>
             
         </div>
-
-
     </div>
-</div>
-
-
 @endsection

@@ -20,6 +20,11 @@
             'route' => 'admin.designations',
             'icon' => 'icon-tree5',
             'title' => 'Designations',
+        ],
+        'employees' => [
+            'route' => 'admin.employees',
+            'icon' => 'icon-people',
+            'title' => 'Employee',
         ]
         // 'settings' => [
         //     'icon' => 'icon-cog',
