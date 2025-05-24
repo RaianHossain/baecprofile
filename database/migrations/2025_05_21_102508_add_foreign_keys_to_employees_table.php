@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreign('InstShort')->references('InstShort')->on('institutes')->onDelete('cascade');
             $table->foreign('DesigShort')->references('DesigShort')->on('designations')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('special_priority')->default(0);
         });
     }
 

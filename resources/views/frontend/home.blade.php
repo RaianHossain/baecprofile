@@ -93,9 +93,17 @@
 
         .research-card:hover
         .text-primary {
-            color: #0058A9 !important;
+            color: #0058A9 !important;            
             text-decoration: underline !important;  
             font-weight: 500 !important;   
+        }
+
+        .small-text {
+          font-size: 0.75rem;
+          color:#8D6F64 !important;
+          padding: 0px !important;
+          margin:0px !important;
+          font-Weight: 00;
         }
     </style>
 
@@ -213,12 +221,15 @@
                         <div class="research-text">
                             <div class="d-flex flex-column align-items-end">
                                 <h5 class="fw-bold text-primary mb-1" style="font-size: 1.1rem !important; font-weight: 600 !important;">{{ $researcher['EmpTitle']." ".$researcher['EmpFname']." ".$researcher['EmpLname'] }}</h5>
+                                <p class="small-text">{{ $researcher->EmpShortDegree }}</p>
                                 
                                 <!-- Modified these paragraphs to handle wrapping properly -->
-                                <p class="designation text-end" style="text-align: right; width: 100%; font-weight: 500;">{{ $researcher->designation->DesigLong }}</p>
+                                <p class="designation text-end" style="text-align: right; width: 100%; font-weight: 500; font-size:0.9rem;">@if($researcher->EmpSpecialAssignment != NULL || $researcher->EmpSpecialAssignment != ""){{ $researcher->EmpSpecialAssignment }} & @endif {{ $researcher->designation->DesigLong }}</p>
+                                @if($researcher->DivShort != "---")
+                                <p class="division text-end" style="text-align: right; width: 100%;">{{ $researcher->division->DivLong }}</p>
+                                @endif
                                 <p class="institute text-end" style="text-align: right; width: 100%; word-break: break-word;">{{ $researcher->institute->InstLong }}</p>
                                 @if($researcher['DivShort'] != '---')
-                                <p class="division text-end" style="text-align: right; width: 100%;">{{ $researcher->division->DivLong }}</p>
                                 @endif
                                 <p class="email text-end" style="text-align: right; width: 100%;">
                                     <i class="fas fa-envelope"></i> 

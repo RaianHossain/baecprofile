@@ -55,15 +55,9 @@ class FrontendController extends Controller
 
         $query = Employee::query()
             ->join('designations', 'employees.DesigShort', '=', 'designations.DesigShort')
-            ->whereNotIn('employees.InstShort', ['Release', 'Missing'])
+            ->whereNotIn('employees.EmpStatus', ['Release'])
             ->select('employees.*', 'designations.DesigWeight')
             ->orderBy('designations.DesigWeight', 'asc')
-            ->orderByRaw("
-                CASE 
-                    WHEN designations.DesigWeight = 2 THEN employees.special_priority
-                    ELSE NULL
-                END ASC
-            ")
             ->orderByRaw("
                 CASE 
                     WHEN designations.DesigWeight != 2 THEN employees.JoiningDate
